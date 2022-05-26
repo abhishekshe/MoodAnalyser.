@@ -1,21 +1,60 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MoodAnalyserAppWithCore;
+using System;
+using System.Runtime.InteropServices;
 
-namespace TesMoodAnalyserMSTestWithCoretProject1
+namespace MoodAnalyserMSTest
 {
     [TestClass]
     public class UnitTest1
     {
-        [TestMethod]
-        public void GivenSadMoodShouldRetuernSad()
+        MoodAnalyser moodAnalyserClass;
+        [TestInitialize]
+        public void Setup()
         {
-            string expected = "SAD";
-            string message = "i am in sad mood";
-
-            MoodAnalyser moodAnalyse = new MoodAnalyser(message);
-
-            string mood = moodAnalyse.AnalyseMood();
-            Assert.AreEqual(expected, mood);
+            moodAnalyserClass = new MoodAnalyser(null);
         }
+        [TestMethod]
+        public void GivenSadMoodShouldReturnSAD()
+        {
+            
+            string expected = "SAD";
+          
+            string actual = moodAnalyserClass.AnalyseMood();
+         
+            Assert.AreEqual(expected, actual);
+
+        }
+        [TestMethod]
+        public void GivenAnyMoodShouldReturnHAPPY()
+        {
+            //Arrange
+            string expected = "HAPPY";
+            ;
+            //Add
+            string actual = moodAnalyserClass.AnalyseMood();
+            //Assert
+            Assert.AreEqual(expected, actual);
+
+        }
+        [TestMethod]
+        
+        public void GivenNullShouldReturnHappy()
+        {
+            
+            try
+            {
+                throw new NullReferenceException();
+            }
+            catch (NullReferenceException ex)
+            {
+                string expected = "Happy " + ex.Message;
+                string actual = moodAnalyserClass.AnalyseMood();
+                Assert.AreEqual(expected, actual);
+
+            }
+        }
+
+
     }
 }

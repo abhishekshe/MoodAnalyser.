@@ -11,18 +11,26 @@ namespace MoodAnalyserAppWithCore
         {
             this.message = message;
         }
-       
+
         public string AnalyseMood()
         {
-            if (this.message.Contains("Sad") )
+            try
             {
-                return "SAD";
+                if (this.message.Contains("Sad") || this.message.Contains("sad"))
+                {
+                    return "SAD";
+                }
+                else
+                {
+                    return "HAPPY";
+                }
             }
-            else
+            catch (NullReferenceException exception)
             {
-                return "HAPPY";
+                return "Happy " + exception.Message;
             }
         }
-    }
 
+    }
 }
+
